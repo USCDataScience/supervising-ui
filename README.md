@@ -37,7 +37,7 @@ Install them using pip
 place this file in a directory with name 'settings.json'
 Example : `workdir/settings.json`
 
-## Step 4: Start server
+## Step 3: Start server
 
 #### Usage
 
@@ -58,6 +58,6 @@ optional arguments:
   -p PORT, --port PORT  Bind port. (Optional
 ```
 
-#### Example 
+#### Example
 
 `python app.py -i workdir/input.txt -w workdir -p 8080`

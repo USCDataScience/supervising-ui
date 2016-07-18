@@ -40,7 +40,8 @@ CREATE_TABLE_STMT = "CREATE TABLE IF NOT EXISTS data (" \
 INSERT_STMT = "INSERT INTO data VALUES (?, ?, ?)"
 UPDATE_STMT = "UPDATE data SET label=?, last_modified=datetime() WHERE url=?"
 SELECT_UNLABELLED = "SELECT * FROM data WHERE label IS NULL"
-SELECT_LABELLLED = "SELECT * FROM data WHERE label IS NOT NULL"
+SELECT_LABELLED = "SELECT * FROM data WHERE label IS NOT NULL"
+GET_STMT = "SELECT * FROM data WHERE url = ?"
 LOG_LEVEL = logging.DEBUG
 
 
@@ -48,7 +49,18 @@ service = None # will be initialized from CLI args
 
 @app.route("/")
 def webpage():
-    data = {'featured_content': get_next(),
+    url = request.args.get('url')
+    if not url:
+        # redirect with url query param so that user can navigate back later
+        next_rec = service.get_next_unlabelled()
+        if next_rec:
+            return redirect("/?url=%s" % (urllib.quote(next_rec['url'])))
+        else:
+            featured_content = "No Unlabelled Record Found."
+    else:
+        featured_content = get_next(url)
+    data = {
+        'featured_content': featured_content,
         'status': service.overall_status()
     }
     return render_template('index.html', **data)
@@ -79,17 +91,15 @@ def get_settings():
 
 @app.route("/download.csv")
 def download():
-    recs = service.query_recs(SELECT_LABELLLED + " ORDER BY last_modified DESC", first_only=False)
+    recs = service.query_recs(SELECT_LABELLED + " ORDER BY last_modified DESC", first_only=False)
     recs = map(lambda r: "\t".join([r['last_modified'], r['url'], r['label']])
                             + "\n", recs)
     return Response(recs, mimetype='text/csv')
 
-def get_next():
-    template_name = '%s.html' % service.settings['type']
-    next_rec = service.query_recs(SELECT_UNLABELLED + " ORDER BY RANDOM() LIMIT 1", first_only=True)
-    if not next_rec:
-        return "No new record found"
+def get_next(url=None):
+    next_rec = service.get_record(url)
     url = next_rec['url']
+    template_name = '%s.html' % service.settings['type']
     data_url = url if url.startswith('http') else "/proxy?url=%s" % urllib.quote(next_rec['url'])
     data = {
         'data_url' : data_url,
@@ -165,6 +175,13 @@ class DbService(object):
         self.db.commit()
         return count
 
+    def get_next_unlabelled(self):
+        return self.query_recs(SELECT_UNLABELLED + " ORDER BY RANDOM() LIMIT 1",
+                                first_only=True)
+
+    def get_record(self, url):
+        return self.db.execute(GET_STMT, (url,)).fetchone()
+
     def query_recs(self, query, first_only=True):
         cur = self.db.execute(query)
         return cur.fetchone() if first_only else cur
@@ -175,8 +192,8 @@ class DbService(object):
         return self.db.execute(query).fetchone()['COUNT']
 
     def overall_status(self):
-        pending = service.get_count("SELECT * FROM data WHERE label IS NULL")
-        total = service.get_count("SELECT * FROM data")
+        pending = self.get_count("SELECT * FROM data WHERE label IS NULL")
+        total = self.get_count("SELECT * FROM data")
         return {'total': total, 'pending': pending, 'done': total - pending}
 
     def __del__(self):
@@ -186,7 +203,7 @@ class DbService(object):
             self.db = None
 
 if __name__ == "__main__":
-    parser = ArgumentParser(description="Web UI for Labeling images")
+    parser = ArgumentParser(description="Web UI for Labelling images")
     parser.add_argument("-i", "--input", help="Path to to input file which has list of paths, one per line. (Optional)")
     parser.add_argument("-w", "--work-dir", help="Work Directory. (Required)", required=True)
     parser.add_argument("-p", "--port", type=int, help="Bind port. (Optional)", default=8080)
