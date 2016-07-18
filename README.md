@@ -15,7 +15,7 @@ Install them using pip
 
 ## Step1 : You need to feed training records
 
-`find your/data -type f' > input.txt`
+`find $HOME -name '*.jpg' > workdir/input.txt `
 
 ## Step 2: Create a settings file that contains labels
 
@@ -23,7 +23,7 @@ Install them using pip
 
 ```
 {
-  "type": "image-labelling",
+  "type": "image-labeling",
   "task": {
 	"labels":[
 		"class1",
@@ -46,7 +46,7 @@ Example : `workdir/settings.json`
 ```
 usage: app.py [-h] [-i INPUT] -w WORK_DIR [-p PORT]
 
-Web UI for Labelling images
+Web UI for Labeling images
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -60,4 +60,4 @@ optional arguments:
 
 #### Example 
 
-`python app.py -i input.txt -w workdir -p 8080`
+`python app.py -i workdir/input.txt -w workdir -p 8080`
