@@ -13,13 +13,13 @@ Install them using pip
 
 # Quick Start
 
-Step1 : You need to feed training records
+## Step1 : You need to feed training records
 
 `find your/data -type f' > input.txt`
 
-Step 2: Create a settings file that contains labels
+## Step 2: Create a settings file that contains labels
 
-Example :
+#### Example :
 
 ```
 {
@@ -37,10 +37,12 @@ Example :
 place this file in a directory with name 'settings.json'
 Example : `workdir/settings.json`
 
-Step 4: Start server
+## Step 4: Start server
 
-### Usage
-python app.py -h
+#### Usage
+
+`python app.py -h`
+
 ```
 usage: app.py [-h] [-i INPUT] -w WORK_DIR [-p PORT]
 
@@ -55,3 +57,7 @@ optional arguments:
                         Work Directory. (Required)
   -p PORT, --port PORT  Bind port. (Optional
 ```
+
+#### Example 
+
+`python app.py -i input.txt -w workdir -p 8080`
