@@ -1,4 +1,4 @@
-# Labelling UI
+# Supervising UI
 
 This project has a web interface to label training data for machine learning task.
 As of now it can allow you to easily label images with one or many labels
@@ -6,8 +6,8 @@ As of now it can allow you to easily label images with one or many labels
 
 # Requires
 
-1. Flask
-2. sqlite
+1. flask
+2. sqlite3
 
 Install them using pip
 
