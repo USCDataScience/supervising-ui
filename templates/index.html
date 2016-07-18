@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Trainer - Create labels for data</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <style>
+      html,body{
+        height: 100%
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Home</a>
+                    </li>
+                    <li role="presentation" ><a href="/download.csv">Download Labelled Data</a>
+                    </li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Labelling UI</h3>
+        </div>
+        <div class="progress">
+            {{ status }}
+        </div>
+        <div>
+          {{ featured_content|safe}}
+        </div>
+        <footer class="footer">
+            <p>&copy; <a href="http://twitter.com/thammegowda">@thammegowda</a></p>
+        </footer>
+
+    </div>
+</body>
+
+</html>
