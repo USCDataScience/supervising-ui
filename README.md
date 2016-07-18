@@ -15,7 +15,7 @@ Install them using pip
 
 ## Step1 : You need to feed training records
 
-`find your/data -type f' > input.txt`
+`find your/data -type f > workdir/input.txt`
 
 ## Step 2: Create a settings file that contains labels
 
@@ -60,4 +60,4 @@ optional arguments:
 
 #### Example 
 
-`python app.py -i input.txt -w workdir -p 8080`
+`python app.py -i workdir/input.txt -w workdir -p 8080`
