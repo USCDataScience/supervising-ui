@@ -15,7 +15,7 @@ Install them using pip
 
 ## Step1 : You need to feed training records
 
-`find your/data -type f > workdir/input.txt`
+`find ~/Desktop -name '*.jpg' > workdir/input.txt `
 
 ## Step 2: Create a settings file that contains labels
 
