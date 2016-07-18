@@ -1,3 +1,20 @@
+#!/usr/bin/env python
+# encoding: utf-8
+# Copyright 2016 Information Retrieval and Data Science (IRDS) Group,
+# University of Southern California (USC), Los Angeles
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from __future__ import print_function
 from argparse import ArgumentParser
 import os
@@ -62,14 +79,14 @@ def get_settings():
 
 @app.route("/download.csv")
 def download():
-    recs = service.query_recs(SELECT_LABELLLED + " ORDER BY last_modified ASC", first_only=False)
+    recs = service.query_recs(SELECT_LABELLLED + " ORDER BY last_modified DESC", first_only=False)
     recs = map(lambda r: "\t".join([r['last_modified'], r['url'], r['label']])
                             + "\n", recs)
     return Response(recs, mimetype='text/csv')
 
 def get_next():
     template_name = '%s.html' % service.settings['type']
-    next_rec = service.query_recs(SELECT_UNLABELLED, first_only=True)
+    next_rec = service.query_recs(SELECT_UNLABELLED + " ORDER BY RANDOM() LIMIT 1", first_only=True)
     if not next_rec:
         return "No new record found"
     url = next_rec['url']
