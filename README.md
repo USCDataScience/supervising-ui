@@ -23,7 +23,7 @@ Install them using pip
 
 ```
 {
-  "type": "image-labelling",
+  "type": "image-labeling",
   "task": {
 	"labels":[
 		"class1",
@@ -46,7 +46,7 @@ Example : `workdir/settings.json`
 ```
 usage: app.py [-h] [-i INPUT] -w WORK_DIR [-p PORT]
 
-Web UI for Labelling images
+Web UI for Labeling images
 
 optional arguments:
   -h, --help            show this help message and exit

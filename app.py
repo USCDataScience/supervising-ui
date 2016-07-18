@@ -186,7 +186,7 @@ class DbService(object):
             self.db = None
 
 if __name__ == "__main__":
-    parser = ArgumentParser(description="Web UI for Labelling images")
+    parser = ArgumentParser(description="Web UI for Labeling images")
     parser.add_argument("-i", "--input", help="Path to to input file which has list of paths, one per line. (Optional)")
     parser.add_argument("-w", "--work-dir", help="Work Directory. (Required)", required=True)
     parser.add_argument("-p", "--port", type=int, help="Bind port. (Optional)", default=8080)

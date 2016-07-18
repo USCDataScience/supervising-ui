@@ -1,5 +1,5 @@
 {
-  "type": "image-labelling",
+  "type": "image-labeling",
   "task": {
 	"labels":[
 		"class1",
