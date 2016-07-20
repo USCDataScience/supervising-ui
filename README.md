@@ -66,7 +66,7 @@ Visit http://localhost:8080 on web browser
 
 
 ## Screenshots 
-![Image](../blob/master/screenshots/labeling-images.png?raw=true)
+![Image](../master/screenshots/labeling-images.png?raw=true)
 
 
 
