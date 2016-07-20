@@ -1,17 +1,19 @@
 <div class="featured-content">
-  <h4> Teach me what is inside this image?</h4>
+  <h2> Teach me what is inside this image?</h2>
   <div class="row-12">
     <div class="col-md-6">
       <form method="POST" action="/update">
         <input type="hidden" name="url" value="{{ url }}">
         {% for label in task.labels %}
-          <input type="checkbox" name="label" value="{{ label }}"> {{ label }}<br>
+          <input type="checkbox" name="label" value="{{ label }}" style="width: 25px; height: 25px;"> {{ label }}<br>
         {% endfor %}
-        <input type="submit" value="Submit">
+        <br/>
+        <input type="submit" class="btn btn-primary" value="Submit">
+        <a class="btn btn-info" href="/"> Later </a>
       </form>
     </div>
     <div class="col-md-6">
-      <img src="{{ data_url}}" />
+      <img src="{{ data_url}}" class="img-fluid img-thumbnail" width="100%"/>
     </div>
   </div>
   <hr/>

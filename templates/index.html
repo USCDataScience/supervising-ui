@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trainer - Create labels for data</title>
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <style>
-      html,body{
-        height: 100%
-      }
-    </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Home</a>
-                    </li>
                     <li role="presentation" ><a href="/download.csv">Download Labelled Data</a>
                     </li>
                 </ul>
             </nav>
-            <h3 class="text-muted">Labeling UI</h3>
+
+            <a href="/"> <h3 class="text">Supervising UI</h3></a>
         </div>
         <div class="progress">
             {{ status }}
