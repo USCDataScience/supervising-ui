@@ -81,7 +81,11 @@ def update():
     assert url
     count = service.update_record(url, labels)
     if count > 0:
-        return redirect(location="/")
+        next_rec = service.get_next_unlabelled()
+        target = "/"
+        if next_rec:
+            target += "?url=%s" % (urllib.quote(next_rec['url']))
+        return redirect(location=target)
     else:
         return abort(400, "Failed... No records updated")
 
