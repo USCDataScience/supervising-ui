@@ -61,3 +61,12 @@ optional arguments:
 #### Example
 
 `python app.py -i workdir/input.txt -w workdir -p 8080`
+
+Visit http://localhost:8080 on web browser
+
+
+## Screenshots 
+![Image](../blob/master/screenshots/labeling-images.png?raw=true)
+
+
+
