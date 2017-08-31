@@ -69,4 +69,10 @@ Visit http://localhost:8080 on web browser
 ![Image](../master/screenshots/labeling-images.png?raw=true)
 
 
+## WARNING:
+
++ DO NOT MAKE THIS SERVICE ACCESSIBLE FROM PUBLIC INTERNET.
+  _Reason: it also acts as a proxy to serve image files to the web browser, it can be tricked by hackers to download other files from file system. So DO NOT OPEN it to public._ 
+  If you are hosting it within your local network in which the service port is not exposed to internet, then it is fine.
+
 
