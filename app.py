@@ -93,7 +93,7 @@ def update():
 def get_settings():
     return json.dumps(service.settings)
 
-@app.route("/download.csv")
+@app.route("/classifications.csv")
 def download():
     recs = service.query_recs(SELECT_LABELLED + " ORDER BY last_modified DESC", first_only=False)
     recs = map(lambda r: "\t".join([r['last_modified'], r['url'], r['label']])
