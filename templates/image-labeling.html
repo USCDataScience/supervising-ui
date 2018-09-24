@@ -2,10 +2,10 @@
   <h2> Classify this image:</h2>
   <div class="row-12">
     <div class="col-md-6">
-      <form method="POST" action="/update">
+      <form method="POST" action="/update" id="form">
         <input type="hidden" name="url" value="{{ url }}">
         {% for label in task.labels %}
-          <input type="checkbox" name="label" value="{{ label }}" style="width: 25px; height: 25px;"> {{ label }}<br>
+          <input type="checkbox" name="label" value="{{ label }}" id="checkbox_{{ label }}" style="width: 25px; height: 25px;">{{ loop.index }}) {{ label }}<br>
         {% endfor %}
         <br/>
         <input type="submit" class="btn btn-primary" value="Submit">
@@ -20,4 +20,25 @@
   <div class="row">
     <p> <i> <small>This image is from {{ url }}</small></i></p>
   </div>
+
+
+  <script type="text/javascript">
+    document.onkeyup = function(e) {
+      e = e || window.event;
+
+      let key = String.fromCharCode(e.keyCode);
+
+      {% for label in task.labels %}
+      if (key == "{{ loop.index }}") {
+        let el = document.getElementById("checkbox_{{ label }}");
+        el.checked = !el.checked;
+      }
+      {% endfor %}
+
+      // submit on enter
+      if (e.keyCode == 13) {
+        document.getElementById("form").submit();
+      }
+    };
+  </script>
 </div>
