@@ -71,7 +71,7 @@ Visit http://localhost:8080 on web browser
 
 
 ## Screenshots 
-![Image](../master/screenshots/multilablel.jpg?raw=true)
+![Image](../master/screenshots/multilabel.jpg?raw=true)
 
 
 ## WARNING:
