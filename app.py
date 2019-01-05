@@ -24,6 +24,10 @@ import sqlite3
 import logging
 from datetime import datetime
 import urllib
+try:
+    from urllib import quote  # Python 2.X
+except ImportError:
+    from urllib.parse import quote  # Python 3+
 
 from flask import Flask, render_template, request, abort, send_file, redirect, Response
 app = Flask(__name__)
@@ -54,7 +58,7 @@ def webpage():
         # redirect with url query param so that user can navigate back later
         next_rec = service.get_next_unlabelled()
         if next_rec:
-            return redirect("/?url=%s" % (urllib.quote(next_rec['url'])))
+            return redirect("/?url=%s" % (quote(next_rec['url'])))
         else:
             featured_content = "No Unlabelled Record Found."
     else:
@@ -84,7 +88,7 @@ def update():
         next_rec = service.get_next_unlabelled()
         target = "/"
         if next_rec:
-            target += "?url=%s" % (urllib.quote(next_rec['url']))
+            target += "?url=%s" % (quote(next_rec['url']))
         return redirect(location=target)
     else:
         return abort(400, "Failed... No records updated")
@@ -104,7 +108,7 @@ def get_next(url=None):
     next_rec = service.get_record(url)
     url = next_rec['url']
     template_name = '%s.html' % service.settings['type']
-    data_url = url if url.startswith('http') else "/proxy?url=%s" % urllib.quote(next_rec['url'])
+    data_url = url if url.startswith('http') else "/proxy?url=%s" % quote(next_rec['url'])
     data = {
         'data_url' : data_url,
         'url': url,
