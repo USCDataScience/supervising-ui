@@ -3,6 +3,7 @@
 This project has a web interface to label training data for machine learning task.
 As of now it can allow you to easily label images with one or many labels
 
+Support both python 2 and python 3
 
 # Requires
 
@@ -25,12 +26,16 @@ Install them using pip
 {
   "type": "image-labeling",
   "task": {
-	"labels":[
-		"class1",
-		"class2",
-		"class3",
-		"class4"
-	 ]
+  "labels":[[
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6"
+   ], ["Front",
+    "Side",
+    "Back"]]
   }
 }
 ```
@@ -66,7 +71,7 @@ Visit http://localhost:8080 on web browser
 
 
 ## Screenshots 
-![Image](../master/screenshots/labeling-images.png?raw=true)
+![Image](../master/screenshots/multilablel.jpg?raw=true)
 
 
 ## WARNING:
