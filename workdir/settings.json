@@ -1,11 +1,9 @@
 {
-  "type": "image-labeling",
+  "type": "text-labeling",
   "task": {
 	"labels":[
 		"class1",
-		"class2",
-		"class3",
-		"class4"
+		"class2"
 	 ]
   }
 }
