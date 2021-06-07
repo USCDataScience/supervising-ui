@@ -1,11 +1,15 @@
 {
   "type": "image-labeling",
   "task": {
-	"labels":[
-		"class1",
-		"class2",
-		"class3",
-		"class4"
-	 ]
+	"labels":[[
+		"D1",
+		"D2",
+		"D3",
+		"D4",
+		"D5",
+		"D6"
+	 ], ["Front",
+		"Side",
+		"Back"]]
   }
 }

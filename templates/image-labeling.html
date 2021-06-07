@@ -4,8 +4,11 @@
     <div class="col-md-6">
       <form method="POST" action="/update" id="form">
         <input type="hidden" name="url" value="{{ url }}">
-        {% for label in task.labels %}
-          <input type="checkbox" name="label" value="{{ label }}" id="checkbox_{{ label }}" style="width: 25px; height: 25px;">{{ loop.index }}) {{ label }}<br>
+        {% for labels in task.labels %}
+        <h3> Category: {{ loop.index }}</h3>
+          {% for label in labels %}
+            <input type="checkbox" name="label" value="{{ label }}" id="checkbox_{{ label }}" style="width: 25px; height: 25px;">{{ loop.index }}) {{ label }}<br>
+          {% endfor %}
         {% endfor %}
         <br/>
         <input type="submit" class="btn btn-primary" value="Submit">
@@ -29,10 +32,12 @@
       let key = String.fromCharCode(e.keyCode);
 
       {% for label in task.labels %}
-      if (key == "{{ loop.index }}") {
-        let el = document.getElementById("checkbox_{{ label }}");
-        el.checked = !el.checked;
-      }
+        {% for label in task.labels %}
+        if (key == "{{ loop.index }}") {
+          let el = document.getElementById("checkbox_{{ label }}");
+          el.checked = !el.checked;
+        }
+        {% endfor %}
       {% endfor %}
 
       // submit on enter
